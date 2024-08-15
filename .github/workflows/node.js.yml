@@ -13,6 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Read .nvmrc
+      run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+      id: nvm
+    - name: Use Node.js ${{ steps.nvm.outputs.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
     - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     - run: nvm use
     - run: npm ci
