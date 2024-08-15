@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - run: sudo apt install nvm
     - run: nvm use
     - run: npm ci
     - run: npm test
